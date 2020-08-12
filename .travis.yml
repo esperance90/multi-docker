@@ -1,0 +1,22 @@
+sudo: required
+language: generic 
+services:
+  - docker
+
+before_install:
+  - docker build -t nadia/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run e CI=true nadia/react-test npm test 
+
+after_success:
+  - docker build -t nadia/multi-client ./client
+  - docker build -t nadia/multi-nginx ./nginx
+  - docker build -t nadia/multi-server ./server
+  - docker build -t nadia/multi-worker ./worker
+   
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push nadia/multi-client
+  - docker push nadia/multi-nginx
+  - docker push nadia/multi-server
+  - docker push nadia/multi-worker
