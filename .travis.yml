@@ -20,3 +20,15 @@ after_success:
   - docker push esperance90/multi-nginx
   - docker push esperance90/multi-server
   - docker push esperance90/multi-worker
+
+deploy:
+  provider: elastibeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env-1
+  bucket_name: elasticbeanstalk-us-east-2-412656458255
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
