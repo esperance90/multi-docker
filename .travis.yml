@@ -4,19 +4,19 @@ services:
   - docker
 
 before_install:
-  - docker build -t nadia/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t esperance90/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true nadia/react-test npm test 
+  - docker run -e CI=true esperance90/react-test npm test 
 
 after_success:
-  - docker build -t nadia/multi-client ./client
-  - docker build -t nadia/multi-nginx ./nginx
-  - docker build -t nadia/multi-server ./server
-  - docker build -t nadia/multi-worker ./worker
+  - docker build -t esperance90/multi-client ./client
+  - docker build -t esperance90/multi-nginx ./nginx
+  - docker build -t esperance90/multi-server ./server
+  - docker build -t esperance90/multi-worker ./worker
    
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push nadia/multi-client:latest
-  - docker push nadia/multi-nginx:latest
-  - docker push nadia/multi-server:latest
-  - docker push nadia/multi-worker:latest
+  - docker push esperance90/multi-client
+  - docker push esperance90/multi-nginx
+  - docker push esperance90/multi-server
+  - docker push esperance90/multi-worker

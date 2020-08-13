@@ -1,5 +1,5 @@
-FROM node:alpine;
-WORDIR '/app';
+FROM node:alpine
+WORDIR '/app'
 COPY ./package.json ./
 RUN npm install
 COPY . .
