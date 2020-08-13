@@ -16,7 +16,7 @@ after_success:
   - docker build -t nadia/multi-worker ./worker
    
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push nadia/multi-client
-  - docker push nadia/multi-nginx
-  - docker push nadia/multi-server
-  - docker push nadia/multi-worker
+  - docker push nadia/multi-client:latest
+  - docker push nadia/multi-nginx:latest
+  - docker push nadia/multi-server:latest
+  - docker push nadia/multi-worker:latest
